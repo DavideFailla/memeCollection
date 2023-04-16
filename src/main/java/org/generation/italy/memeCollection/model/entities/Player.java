@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -27,8 +28,14 @@ public class Player {
     private String nickname;
     private String password;
     @OneToMany(mappedBy = "player", fetch = FetchType.EAGER)
-    private Album album;
-    @OneToMany(mappedBy = "player", fetch = FetchType.EAGER)
-    private Deck deck;
+    private List<Album> album;
     private double money;
+
+    public Album getAlbumFromEdition(Edition e){
+        if(e == Edition.OG){
+            return album.get(0);
+        }else {
+            return album.get(1);
+        }
+    }
 }

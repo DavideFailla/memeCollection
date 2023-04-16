@@ -13,7 +13,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Pack {
-    private List<Card> packCards;
     private double cost;
     private Edition edition;
 }

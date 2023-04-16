@@ -1,11 +1,14 @@
 package org.generation.italy.memeCollection.model.entities;
 
+import io.hypersistence.utils.hibernate.type.basic.PostgreSQLEnumType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -24,10 +27,12 @@ public class Album {
     private String description;
     @OneToMany(mappedBy = "album")
     private Set<Card> cardSet;
-    @ManyToOne
-    @JoinColumn(name = "id_edition")
+    @Column(columnDefinition = "edition")
+    @Type(PostgreSQLEnumType.class)
     private Edition edition;
     @ManyToOne
     @JoinColumn(name = "id_player")
     private Player player;
+    @OneToMany(mappedBy = "album")
+    private List<Card> cardDuplicates;
 }
