@@ -1,5 +1,6 @@
 package org.generation.italy.memeCollection.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.hypersistence.utils.hibernate.type.basic.PostgreSQLEnumType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -27,6 +28,7 @@ public class Album {
     private String description;
     @OneToMany(mappedBy = "album")
     private Set<Card> cardSet;
+    @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "edition")
     @Type(PostgreSQLEnumType.class)
     private Edition edition;

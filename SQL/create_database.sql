@@ -75,6 +75,9 @@ CREATE SEQUENCE card_sequence
 	OWNED BY card.id_card;
 
 
+	--SELECT setval('sequence_name', 1, FALSE); per resettare la sequenza
+
+
 
 
 

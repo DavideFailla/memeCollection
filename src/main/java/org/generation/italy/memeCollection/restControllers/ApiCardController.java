@@ -39,19 +39,14 @@ public class ApiCardController {
 //        }
 //    }
 
-    @PostMapping()
-    public ResponseEntity<List<Card>> createPack(){
-        Pack p = new Pack(20, Edition.OG);
-        List<Album> albums = new ArrayList<>();
-        Album album = new Album(1,"ogalbum","cool",
-                null,Edition.OG,null,null);
-        albums.add(album);
-        Player player = new Player(1,"davide"
-                ,"failla", LocalDate.now(),"dasf","byawa",
-                "wilduce",albums,200);
-        List<Card>cards = gameService.createPack(p,player);
-        return ResponseEntity.ok().body(cards);
-    }
+//    @PostMapping()
+//    public ResponseEntity<List<Card>> createPack(){
+//        List<Card>cards = gameService.createPack(Edition.OG);
+//        if(cards.size() != 0){
+//            return ResponseEntity.ok().body(cards);
+//        }
+//        return ResponseEntity.notFound().build();
+//    }
 
     @GetMapping()
     public ResponseEntity<List<CardDto>> findAll(){

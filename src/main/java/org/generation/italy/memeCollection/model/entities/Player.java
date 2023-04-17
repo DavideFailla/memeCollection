@@ -1,5 +1,6 @@
 package org.generation.italy.memeCollection.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,7 +28,7 @@ public class Player {
     private String email;
     private String nickname;
     private String password;
-    @OneToMany(mappedBy = "player", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "player", fetch = FetchType.LAZY)
     private List<Album> album;
     private double money;
 
