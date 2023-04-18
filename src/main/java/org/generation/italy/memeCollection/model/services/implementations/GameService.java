@@ -222,6 +222,16 @@ public class GameService implements AbstractGameService {
     public List<Card> findInDuplicatesByCardNameAndFunLevelAndRarity(String cardName, FunLevel funLevel, Rarity rarity, Player player) {
         return cardRepo.findInDuplicatesByCardNameAndFunLevelAndRarity(cardName, funLevel, rarity, player);
     }
+
+    @Override
+    public List<Card> findInDuplicatesAllCards(Player player) {
+        return cardRepo.findInDuplicatesAllCards(player);
+    }
+
+    @Override
+    public List<Card> findInAlbumAllCards(Player player, Album album) {
+        return cardRepo.findByAlbumAndPlayer(player, album);
+    }
 }
 
 //                    else {

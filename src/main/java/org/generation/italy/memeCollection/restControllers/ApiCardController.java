@@ -78,8 +78,18 @@ public class ApiCardController {
                                                                                    @RequestParam(required = false) Rarity rarity){
 
         Player player = gameService.getPlayerFromId(playerId);
+        System.out.println(playerId);
+        System.out.println(player);
         Album album = gameService.getAlbumFromId(albumId);
-        if(funLevel == null && rarity == null ){
+        System.out.println(albumId);
+        System.out.println(album);
+        if(funLevel == null && rarity == null && cardName == null ){
+            System.out.println("Sono nell'if");
+            List<Card> lc = gameService.findInAlbumAllCards(player,album);
+            System.out.println(lc);
+            return ResponseEntity.ok().body(CardDto.fromEntityList(lc));
+        } else if(funLevel == null && rarity == null ){
+            cardName = "%" + cardName + "%";
             List<Card> lc = gameService.findInAlbumByCardName(album,cardName,player);
             return ResponseEntity.ok().body(CardDto.fromEntityList(lc));
         } else if(funLevel == null && cardName == null ){
@@ -89,26 +99,34 @@ public class ApiCardController {
             List<Card> lc = gameService.findInAlbumByFunLevel(funLevel, player, album);
             return ResponseEntity.ok().body(CardDto.fromEntityList(lc));
         }else if(funLevel == null ){
+            cardName = "%" + cardName + "%";
             List<Card> lc = gameService.findInAlbumByCardNameAndRarity(album, cardName, player, rarity);
             return ResponseEntity.ok().body(CardDto.fromEntityList(lc));
         } else if(rarity == null){
+            cardName = "%" + cardName + "%";
             List<Card> lc = gameService.findInAlbumByCardNameAndFunLevel(album, cardName, player, funLevel);
             return ResponseEntity.ok().body(CardDto.fromEntityList(lc));
         }else if(cardName == null){
             List<Card> lc = gameService.findInAlbumByFunLevelAndRarity(funLevel, rarity, player, album);
             return ResponseEntity.ok().body(CardDto.fromEntityList(lc));
         }
+            cardName = "%" + cardName + "%";
             List<Card> lc = gameService.findInAlbumByCardNameAndFunLevelAndRarity(funLevel, cardName, rarity, player, album);
             return ResponseEntity.ok().body(CardDto.fromEntityList(lc));
 
     }
     @GetMapping("/findInDuplicates")
-    public ResponseEntity<List<CardDto>> findInDuplicatesByCardNameAndEditionAndFunLevelAndRarity(@RequestParam() Player player,
+    public ResponseEntity<List<CardDto>> findInDuplicatesByCardNameAndEditionAndFunLevelAndRarity(@RequestParam long playerId,
                                                                                                   @RequestParam(required = false) Edition edition,
                                                                                                   @RequestParam(required = false) String cardName,
                                                                                                   @RequestParam(required = false) FunLevel funLevel,
                                                                                                   @RequestParam(required = false) Rarity rarity){
-        if(funLevel == null && rarity == null && edition == null) {
+        Player player = gameService.getPlayerFromId(playerId);
+        if(funLevel == null && rarity == null && cardName == null && edition == null ){
+            List<Card> lc = gameService.findInDuplicatesAllCards(player);
+            return ResponseEntity.ok().body(CardDto.fromEntityList(lc));
+        }else if (funLevel == null && rarity == null && edition == null) {
+            cardName = "%" + cardName + "%";
             List<Card> lc = gameService.findInDuplicatesByCardName(cardName, player);
             return ResponseEntity.ok().body(CardDto.fromEntityList(lc));
         } else if(funLevel == null && rarity == null && cardName == null){
@@ -127,30 +145,37 @@ public class ApiCardController {
             List<Card> lc = gameService.findInDuplicatesByEditionAndFunLevel(funLevel, player,edition);
             return ResponseEntity.ok().body(CardDto.fromEntityList(lc));
         }else if(rarity == null && edition == null ){
+            cardName = "%" + cardName + "%";
             List<Card> lc = gameService.findInDuplicatesByCardNameAndFunLevel(cardName, funLevel, player);
             return ResponseEntity.ok().body(CardDto.fromEntityList(lc));
         }else if(edition == null && cardName == null ){
             List<Card> lc = gameService.findInDuplicatesByFunLevelAndRarity(funLevel,rarity,player);
             return ResponseEntity.ok().body(CardDto.fromEntityList(lc));
         }else if(edition == null && funLevel == null ){
+            cardName = "%" + cardName + "%";
             List<Card> lc = gameService.findInDuplicatesByCardNameAndRarity(cardName, rarity, player);
             return ResponseEntity.ok().body(CardDto.fromEntityList(lc));
         }else if(rarity == null && funLevel == null ){
+            cardName = "%" + cardName + "%";
             List<Card> lc = gameService.findInDuplicatesByCardNameAndEdition(cardName, player, edition);
             return ResponseEntity.ok().body(CardDto.fromEntityList(lc));
         }else if(funLevel == null ){
+            cardName = "%" + cardName + "%";
             List<Card> lc = gameService.findInDuplicatesByEditionAndCardNameAndRarity(cardName, rarity, player, edition);
             return ResponseEntity.ok().body(CardDto.fromEntityList(lc));
         } else if(rarity == null){
+            cardName = "%" + cardName + "%";
             List<Card> lc = gameService.findInDuplicatesByEditionAndCardNameAndFunLevel(cardName, funLevel, player, edition);
             return ResponseEntity.ok().body(CardDto.fromEntityList(lc));
         }else if(cardName == null){
             List<Card> lc = gameService.findInDuplicatesByEditionAndFunLevelAndRarity(funLevel, rarity, player, edition);
             return ResponseEntity.ok().body(CardDto.fromEntityList(lc));
         }else if(edition == null){
+            cardName = "%" + cardName + "%";
             List<Card> lc = gameService.findInDuplicatesByCardNameAndFunLevelAndRarity(cardName, funLevel, rarity, player);
             return ResponseEntity.ok().body(CardDto.fromEntityList(lc));
         }
+        cardName = "%" + cardName + "%";
         List<Card> lc = gameService.findInDuplicatesByEditionAndCardNameAndFunLevelAndRarity(cardName, funLevel, rarity, player, edition);
         return ResponseEntity.ok().body(CardDto.fromEntityList(lc));
 

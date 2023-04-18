@@ -46,4 +46,9 @@ public interface AbstractGameService {
     List<Card> findInDuplicatesByEditionAndCardNameAndFunLevelAndRarity(String cardName, FunLevel funLevel, Rarity rarity, Player player, Edition edition);
 
     List<Card> findInDuplicatesByCardNameAndFunLevelAndRarity(String cardName, FunLevel funLevel, Rarity rarity, Player player);
+
+    List<Card> findInDuplicatesAllCards(Player player);
+
+
+    List<Card> findInAlbumAllCards(Player player, Album album);
 }
