@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
-import java.util.Set;
 
 @Service
 public class GameService implements AbstractGameService {
@@ -37,48 +37,41 @@ public class GameService implements AbstractGameService {
         List<Meme> meme1;
         List<Meme> meme2;
         List<Meme> meme3;
-        Pageable pag = randomCard(edition,Rarity.COMMON);
+        Pageable pag = drawRandomCard(edition,Rarity.COMMON);
         meme1 = memeRepo.findByEditionAndRarity(edition, Rarity.COMMON,pag);
         pack.add(new Card(0,null,null,meme1.get(0)));
         double random = Math.floor(Math.random()*3);
         if(random == 0 || random == 1){
-            pag = randomCard(edition,Rarity.UNCOMMON);
+            pag = drawRandomCard(edition,Rarity.UNCOMMON);
             meme2 = memeRepo.findByEditionAndRarity(edition, Rarity.UNCOMMON,pag);
         }else {
-            pag = randomCard(edition,Rarity.COMMON);
+            pag = drawRandomCard(edition,Rarity.COMMON);
             meme2 = memeRepo.findByEditionAndRarity(edition, Rarity.COMMON,pag);
         }
         pack.add(new Card(0,null,null,meme2.get(0)));
         random = Math.floor(Math.random()*6);
         if(random == 0 || random == 1 || random == 2){
-            pag = randomCard(edition,Rarity.RARE);
+            pag = drawRandomCard(edition,Rarity.RARE);
             meme3 = memeRepo.findByEditionAndRarity(edition, Rarity.RARE,pag);
         }else if(random == 3 || random == 4){
-            pag = randomCard(edition,Rarity.EPIC);
+            pag = drawRandomCard(edition,Rarity.EPIC);
             meme3 = memeRepo.findByEditionAndRarity(edition, Rarity.EPIC,pag);
         }else {
-            pag = randomCard(edition,Rarity.LEGENDARY);
+            pag = drawRandomCard(edition,Rarity.LEGENDARY);
             meme3 = memeRepo.findByEditionAndRarity(edition, Rarity.LEGENDARY,pag);
         }
         pack.add(new Card(0,null,null,meme3.get(0)));
         return pack;
     }
 
-    private Pageable randomCard(Edition e, Rarity r){
-        int num = memeRepo.countByEditionAndRarity(e,r);
-        int randomRarity = random.nextInt(num);
-        return PageRequest.of(randomRarity,1);
+    public int getCountByEditionAndRarity(Edition edition, Rarity rarity){
+        return memeRepo.countByEditionAndRarity(edition, rarity);
     }
 
-    private boolean isCardADuplicate(Album playerAlbum, Card c){
-        for(Card card : playerAlbum.getCardSet()){
-            if(c.getMeme().getName().equals(card.getMeme().getName())){ // se si verifica questo allora la carta è un duplicato
-                playerAlbum.getCardDuplicates().add(c);
-                cardRepo.save(c);
-                return true;
-            }
-        }
-        return false;
+    private Pageable drawRandomCard(Edition e, Rarity r){
+        int num = getCountByEditionAndRarity(e,r);
+        int randomRarity = random.nextInt(num);
+        return PageRequest.of(randomRarity,1);
     }
 
     @Override
@@ -86,21 +79,38 @@ public class GameService implements AbstractGameService {
         Album playerAlbum = albumRepo.findByEditionAndPlayer(Edition.OG,player);
         for (Card c : pack){
             c.setPlayer(player);
-            if(playerAlbum.getCardSet().isEmpty()){ //allora sicuramente non ci sono duplicati
-                c.setAlbum(playerAlbum);
-                playerAlbum.getCardSet().add(c);
-                cardRepo.save(c);
-            }else {
-                if(isCardADuplicate(playerAlbum,c)){ //allora la carta è un duplicato
-
+                if(playerAlbum.isCardADuplicate(c)){ //allora la carta è un duplicato
+                    playerAlbum.addDuplicates(c);
                 }else {
                     c.setAlbum(playerAlbum);
-                    playerAlbum.getCardSet().add(c);
-                    cardRepo.save(c);
+                    playerAlbum.addCard(c);
                 }
-            }
+                cardRepo.save(c);
         }
         return player;
+    }
+
+    @Override
+    public List<Card> showAlbum(Player player, Album album) {
+        return cardRepo.findByAlbumAndPlayer(album,player);
+    }
+
+    @Override
+    public Player getPlayerFromId(long playerId) {
+        Optional<Player> player = playerRepo.findById(playerId);
+        if(player.isPresent()){
+            return player.get();
+        }
+        return null;
+    }
+
+    @Override
+    public Album getAlbumFromId(long albumId) {
+        Optional<Album> album = albumRepo.findById(albumId);
+        if(album.isPresent()){
+            return album.get();
+        }
+        return null;
     }
 }
 

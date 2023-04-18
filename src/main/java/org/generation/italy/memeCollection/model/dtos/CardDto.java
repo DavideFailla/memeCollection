@@ -1,5 +1,8 @@
 package org.generation.italy.memeCollection.model.dtos;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.generation.italy.memeCollection.model.entities.Card;
 import org.generation.italy.memeCollection.model.entities.Edition;
 import org.generation.italy.memeCollection.model.entities.FunLevel;
@@ -8,6 +11,9 @@ import org.generation.italy.memeCollection.model.entities.Rarity;
 import java.util.List;
 import java.util.stream.StreamSupport;
 
+@Getter
+@Setter
+@NoArgsConstructor
 public class CardDto {
     private long id;
     private String name;

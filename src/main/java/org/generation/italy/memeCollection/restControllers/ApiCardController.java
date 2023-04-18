@@ -14,9 +14,11 @@ import java.net.URI;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "api/cards")
+@CrossOrigin
 public class ApiCardController {
     private GenericService<Card> service;
     private AbstractGameService gameService;
@@ -48,7 +50,9 @@ public class ApiCardController {
 //        return ResponseEntity.notFound().build();
 //    }
 
-    @GetMapping()
+
+
+    @GetMapping("/showAllCards")
     public ResponseEntity<List<CardDto>> findAll(){
         try {
             List<Card> cards = this.service.findAll();
@@ -57,5 +61,16 @@ public class ApiCardController {
             e.printStackTrace();
             return ResponseEntity.internalServerError().build();
         }
+    }
+
+    @GetMapping("/showAlbum")
+    public ResponseEntity<List<CardDto>> showAlbum(@RequestParam long playerId,@RequestParam long albumId){
+        Player player = gameService.getPlayerFromId(playerId);
+        Album album = gameService.getAlbumFromId(albumId);
+        List<Card> result = gameService.showAlbum(player,album);
+        if(result.size() > 0){
+            return ResponseEntity.ok().body(CardDto.fromEntityList(result));
+        }
+        return ResponseEntity.noContent().build();
     }
 }

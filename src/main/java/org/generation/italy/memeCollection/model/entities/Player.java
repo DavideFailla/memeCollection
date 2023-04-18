@@ -31,12 +31,4 @@ public class Player {
     @OneToMany(mappedBy = "player", fetch = FetchType.LAZY)
     private List<Album> album;
     private double money;
-
-    public Album getAlbumFromEdition(Edition e){
-        if(e == Edition.OG){
-            return album.get(0);
-        }else {
-            return album.get(1);
-        }
-    }
 }
