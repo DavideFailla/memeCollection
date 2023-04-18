@@ -1,11 +1,15 @@
 package org.generation.italy.memeCollection.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.hypersistence.utils.hibernate.type.basic.PostgreSQLEnumType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -24,10 +28,30 @@ public class Album {
     private String description;
     @OneToMany(mappedBy = "album")
     private Set<Card> cardSet;
-    @ManyToOne
-    @JoinColumn(name = "id_edition")
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "edition")
+    @Type(PostgreSQLEnumType.class)
     private Edition edition;
     @ManyToOne
     @JoinColumn(name = "id_player")
     private Player player;
+    @OneToMany(mappedBy = "album")
+    private List<Card> cardDuplicates;
+
+    public boolean isCardADuplicate(Card c){
+        for(Card card : cardSet){
+            if(c.equals(card)){ // se si verifica questo allora la carta è un duplicato
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void addDuplicates(Card c){
+        cardDuplicates.add(c);
+    }
+
+    public void addCard(Card c){
+        cardSet.add(c);
+    }
 }
