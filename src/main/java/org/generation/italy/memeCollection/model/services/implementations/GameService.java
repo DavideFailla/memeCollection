@@ -83,7 +83,7 @@ public class GameService implements AbstractGameService {
 
     @Override
     public Player assignCardToPlayer(List<Card> pack, Player player){
-        Album playerAlbum = player.getAlbumFromEdition(pack.get(0).getMeme().getEdition());
+        Album playerAlbum = albumRepo.findByEditionAndPlayer(Edition.OG,player);
         for (Card c : pack){
             c.setPlayer(player);
             if(playerAlbum.getCardSet().isEmpty()){ //allora sicuramente non ci sono duplicati
