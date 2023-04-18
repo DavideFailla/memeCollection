@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.hibernate.annotations.Type;
 
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -35,4 +36,17 @@ public class Meme {
     @Column(columnDefinition = "rarity")
     @Type(PostgreSQLEnumType.class)
     private Rarity rarity;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Meme meme = (Meme) o;
+        return getId() == meme.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
 }

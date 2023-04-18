@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -27,5 +29,18 @@ public class Card {
     @ManyToOne
     @JoinColumn(name = "id_meme")
     private Meme meme;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Card card = (Card) o;
+        return Objects.equals(getMeme(), card.getMeme());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getMeme());
+    }
 }
 

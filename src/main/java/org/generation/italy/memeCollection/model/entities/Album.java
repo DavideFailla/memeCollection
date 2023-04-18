@@ -37,4 +37,21 @@ public class Album {
     private Player player;
     @OneToMany(mappedBy = "album")
     private List<Card> cardDuplicates;
+
+    public boolean isCardADuplicate(Card c){
+        for(Card card : cardSet){
+            if(c.equals(card)){ // se si verifica questo allora la carta è un duplicato
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void addDuplicates(Card c){
+        cardDuplicates.add(c);
+    }
+
+    public void addCard(Card c){
+        cardSet.add(c);
+    }
 }

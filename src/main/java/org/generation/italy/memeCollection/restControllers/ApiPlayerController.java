@@ -18,6 +18,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "api/players")
+@CrossOrigin
 public class ApiPlayerController {
     private GenericService<Player> service;
     private AbstractGameService gameService;
@@ -27,7 +28,7 @@ public class ApiPlayerController {
         this.gameService = gameService;
     }
 
-    @PostMapping()
+    @PostMapping("/createPack")
     ResponseEntity<PlayerDto> assignCardsToPlayer(@RequestParam long playerId){
         try {
             List<Card> cards = gameService.createPack(Edition.OG);
@@ -42,7 +43,7 @@ public class ApiPlayerController {
         }
     }
 
-    @GetMapping()
+    @GetMapping("/findAllPlayers")
     public ResponseEntity<List<PlayerDto>> findAll(){
         try {
             List<Player> players = this.service.findAll();
