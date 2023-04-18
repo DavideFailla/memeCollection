@@ -112,6 +112,116 @@ public class GameService implements AbstractGameService {
         }
         return null;
     }
+
+    @Override
+    public List<Card> findInAlbumByCardName(Album album, String cardName, Player player) {
+        return cardRepo.findInAlbumByCardName(album,cardName,player);
+    }
+
+    @Override
+    public List<Card> findInAlbumByCardNameAndRarity(Album album, String cardName, Player player, Rarity rarity) {
+        return cardRepo.findInAlbumByCardNameAndRarity(album, cardName, player, rarity);
+    }
+
+    @Override
+    public List<Card> findInAlbumByCardNameAndFunLevel(Album album, String cardName, Player player, FunLevel funLevel) {
+        return cardRepo.findInAlbumByCardNameAndFunLevel(album, cardName, player, funLevel);
+    }
+
+    @Override
+    public List<Card> findInAlbumByCardNameAndFunLevelAndRarity(FunLevel funLevel, String cardName, Rarity rarity, Player player, Album album) {
+        return cardRepo.findInAlbumByCardNameAndFunLevelAndRarity(funLevel, cardName, rarity, player, album);
+    }
+
+    @Override
+    public List<Card> findInAlbumByFunLevel(FunLevel funLevel, Player player, Album album) {
+        return cardRepo.findInAlbumByFunLevel(funLevel, player, album);
+    }
+
+    @Override
+    public List<Card> findInAlbumByRarity(Rarity rarity, Player player, Album album) {
+        return cardRepo.findInAlbumByRarity(rarity, player, album);
+    }
+
+    @Override
+    public List<Card> findInAlbumByFunLevelAndRarity(FunLevel funLevel, Rarity rarity, Player player, Album album) {
+        return cardRepo.findInAlbumByFunLevelAndRarity(funLevel, rarity, player, album);
+    }
+
+    @Override
+    public List<Card> findInDuplicatesByCardName(String cardName, Player player) {
+        return cardRepo.findInDuplicatesByCardName(cardName,player);
+    }
+
+    @Override
+    public List<Card> findInDuplicatesByCardNameAndEdition(String cardName, Player player, Edition edition) {
+        return cardRepo.findInDuplicatesByCardNameAndEdition(cardName, player, edition);
+    }
+
+    @Override
+    public List<Card> findInDuplicatesByEdition(Player player, Edition edition) {
+        return cardRepo.findInDuplicatesByEdition(player, edition);
+    }
+
+    @Override
+    public List<Card> findInDuplicatesByEditionAndFunLevel(FunLevel funLevel, Player player, Edition edition) {
+        return cardRepo.findInDuplicatesByEditionAndFunLevel(funLevel, player, edition);
+    }
+
+    @Override
+    public List<Card> findInDuplicatesByFunLevel(FunLevel funLevel, Player player) {
+        return cardRepo.findInDuplicatesByFunLevel(funLevel, player);
+    }
+
+    @Override
+    public List<Card> findInDuplicatesByEditionAndCardNameAndFunLevel(String cardName, FunLevel funLevel, Player player, Edition edition) {
+        return cardRepo.findInDuplicatesByEditionAndCardNameAndFunLevel(cardName, funLevel, player, edition);
+    }
+
+    @Override
+    public List<Card> findInDuplicatesByCardNameAndFunLevel(String cardName, FunLevel funLevel, Player player) {
+        return cardRepo.findInDuplicatesByCardNameAndFunLevel(cardName, funLevel, player);
+    }
+
+    @Override
+    public List<Card> findInDuplicatesByEditionAndRarity(Rarity rarity, Player player, Edition edition) {
+        return cardRepo.findInDuplicatesByEditionAndRarity(rarity, player, edition);
+    }
+
+    @Override
+    public List<Card> findInDuplicatesByRarity(Rarity rarity, Player player) {
+        return cardRepo.findInDuplicatesByRarity(rarity, player);
+    }
+
+    @Override
+    public List<Card> findInDuplicatesByEditionAndCardNameAndRarity(String cardName, Rarity rarity, Player player, Edition edition) {
+        return cardRepo.findInDuplicatesByEditionAndCardNameAndRarity(cardName, rarity, player, edition);
+    }
+
+    @Override
+    public List<Card> findInDuplicatesByCardNameAndRarity(String cardName, Rarity rarity, Player player) {
+        return cardRepo.findInDuplicatesByCardNameAndRarity(cardName, rarity, player);
+    }
+
+    @Override
+    public List<Card> findInDuplicatesByEditionAndFunLevelAndRarity(FunLevel funLevel, Rarity rarity, Player player, Edition edition) {
+        return cardRepo.findInDuplicatesByEditionAndFunLevelAndRarity(funLevel, rarity, player, edition);
+    }
+
+    @Override
+    public List<Card> findInDuplicatesByFunLevelAndRarity(FunLevel funLevel, Rarity rarity, Player player) {
+        return cardRepo.findInDuplicatesByFunLevelAndRarity(funLevel, rarity, player);
+    }
+
+    @Override
+    public List<Card> findInDuplicatesByEditionAndCardNameAndFunLevelAndRarity(String cardName, FunLevel funLevel, Rarity rarity, Player player, Edition edition) {
+        return cardRepo.findInDuplicatesByEditionAndCardNameAndFunLevelAndRarity(cardName, funLevel, rarity, player, edition);
+    }
+
+    @Override
+    public List<Card> findInDuplicatesByCardNameAndFunLevelAndRarity(String cardName, FunLevel funLevel, Rarity rarity, Player player) {
+        return cardRepo.findInDuplicatesByCardNameAndFunLevelAndRarity(cardName, funLevel, rarity, player);
+    }
 }
 
 //                    else {
