@@ -22,13 +22,11 @@ public class Player {
     @SequenceGenerator(name = "player_generator", sequenceName = "player_sequence", allocationSize = 1)
     @Column(name = "id_player")
     private long id;
-    private String firstname;
-    private String lastname;
-    private LocalDate dob;
-    private String email;
     private String nickname;
-    private String password;
     @OneToMany(mappedBy = "player", fetch = FetchType.LAZY)
     private List<Album> album;
     private double money;
+    @OneToOne
+    @JoinColumn(name = "id_user")
+    private User user;
 }

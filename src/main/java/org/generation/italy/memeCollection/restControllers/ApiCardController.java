@@ -78,15 +78,9 @@ public class ApiCardController {
                                                                                    @RequestParam(required = false) Rarity rarity){
 
         Player player = gameService.getPlayerFromId(playerId);
-        System.out.println(playerId);
-        System.out.println(player);
         Album album = gameService.getAlbumFromId(albumId);
-        System.out.println(albumId);
-        System.out.println(album);
         if(funLevel == null && rarity == null && cardName == null ){
-            System.out.println("Sono nell'if");
             List<Card> lc = gameService.findInAlbumAllCards(player,album);
-            System.out.println(lc);
             return ResponseEntity.ok().body(CardDto.fromEntityList(lc));
         } else if(funLevel == null && rarity == null ){
             cardName = "%" + cardName + "%";
