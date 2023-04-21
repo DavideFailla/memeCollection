@@ -10,6 +10,7 @@ import lombok.Setter;
 import org.generation.italy.memeCollection.model.entities.Album;
 import org.generation.italy.memeCollection.model.entities.Player;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.StreamSupport;
@@ -21,7 +22,7 @@ import java.util.stream.StreamSupport;
 public class PlayerDto {
     private long id;
     private String nickname;
-    private double money;
+    private BigDecimal money;
 
     public static PlayerDto fromEntity(Player p){
         return new PlayerDto(p.getId(),p.getNickname(),p.getMoney());

@@ -1,5 +1,6 @@
 package org.generation.italy.memeCollection.model.services.implementations;
 
+import org.generation.italy.memeCollection.auth.AuthenticationResponse;
 import org.generation.italy.memeCollection.model.data.abstractions.*;
 import org.generation.italy.memeCollection.model.entities.*;
 import org.generation.italy.memeCollection.model.entities.Rarity;
@@ -21,14 +22,22 @@ public class GameService implements AbstractGameService {
     private CardRepository cardRepo;
     private PlayerRepository playerRepo;
     private MemeRepository memeRepo;
+    private TokenRepository tokenRepo;
     private Random random = new Random();
 
     @Autowired
-    public GameService(AlbumRepository albumRepo, CardRepository cardRepo, PlayerRepository playerRepo, MemeRepository memeRepo) {
+    public GameService(AlbumRepository albumRepo, CardRepository cardRepo, PlayerRepository playerRepo,
+                       MemeRepository memeRepo, TokenRepository tokenRepo) {
         this.albumRepo = albumRepo;
         this.cardRepo = cardRepo;
         this.playerRepo = playerRepo;
         this.memeRepo = memeRepo;
+        this.tokenRepo = tokenRepo;
+    }
+
+    @Override
+    public Player findPlayerByEmail(String email){
+        return playerRepo.findPlayerByEmail(email);
     }
 
     @Override

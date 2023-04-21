@@ -32,6 +32,8 @@ public class User implements UserDetails {
     private Role role;
     @OneToMany(mappedBy = "user")
     private List<Token> tokens;
+    @OneToOne(mappedBy = "user")
+    private Player player;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() { //ruoli dell'utente
         return List.of(new SimpleGrantedAuthority(role.name()));

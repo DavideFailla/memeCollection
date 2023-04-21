@@ -42,7 +42,7 @@ CREATE SEQUENCE token_sequence
 CREATE TABLE player(
 	id_player BIGINT NOT NULL,
 	nickname VARCHAR(32) NOT NULL,
-	money MONEY NOT NULL,
+	money NUMERIC(38,2) NOT NULL,
 	id_user INTEGER NOT NULL,
 	CONSTRAINT PK_player PRIMARY KEY(id_player),
 	CONSTRAINT FK_player_user FOREIGN KEY(id_user)

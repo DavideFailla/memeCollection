@@ -7,12 +7,10 @@ import lombok.RequiredArgsConstructor;
 import org.generation.italy.memeCollection.auth.AuthenticationRequest;
 import org.generation.italy.memeCollection.auth.AuthenticationResponse;
 import org.generation.italy.memeCollection.auth.RegisterRequest;
+import org.generation.italy.memeCollection.model.data.abstractions.PlayerRepository;
 import org.generation.italy.memeCollection.model.data.abstractions.TokenRepository;
 import org.generation.italy.memeCollection.model.data.abstractions.UserRepository;
-import org.generation.italy.memeCollection.model.entities.Role;
-import org.generation.italy.memeCollection.model.entities.Token;
-import org.generation.italy.memeCollection.model.entities.TokenType;
-import org.generation.italy.memeCollection.model.entities.User;
+import org.generation.italy.memeCollection.model.entities.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Service
@@ -30,6 +29,7 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final PlayerRepository playerRepository;
 
     public AuthenticationResponse register(RegisterRequest request) {
         var user = User.builder()
@@ -40,7 +40,13 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
                 .build();
+        Player player = Player.builder()
+                .nickname(request.getNickname())
+                .money(new BigDecimal("2000.0"))
+                .user(user)
+                .build();
         var savedUser = repository.save(user);
+        var savedPlayer = playerRepository.save(player);
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
         saveUserToken(savedUser, jwtToken);

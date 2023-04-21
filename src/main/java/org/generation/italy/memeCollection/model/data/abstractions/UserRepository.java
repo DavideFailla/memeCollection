@@ -1,5 +1,6 @@
 package org.generation.italy.memeCollection.model.data.abstractions;
 
+import org.generation.italy.memeCollection.model.entities.Player;
 import org.generation.italy.memeCollection.model.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
