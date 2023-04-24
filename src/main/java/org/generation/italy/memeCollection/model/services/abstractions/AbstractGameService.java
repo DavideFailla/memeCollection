@@ -4,6 +4,7 @@ import org.generation.italy.memeCollection.model.entities.*;
 
 import java.util.List;
 
+
 public interface AbstractGameService {
     Player findPlayerByEmail(String email);
     List<Card> createPack(Edition edition);
