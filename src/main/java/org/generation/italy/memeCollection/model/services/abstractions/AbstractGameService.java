@@ -5,6 +5,7 @@ import org.generation.italy.memeCollection.model.entities.*;
 import java.util.List;
 
 public interface AbstractGameService {
+    Player findPlayerByEmail(String email);
     List<Card> createPack(Edition edition);
     Player assignCardToPlayer(List<Card> pack, Player player);
     List<Card> showAlbum(Player player, Album album);
@@ -46,4 +47,9 @@ public interface AbstractGameService {
     List<Card> findInDuplicatesByEditionAndCardNameAndFunLevelAndRarity(String cardName, FunLevel funLevel, Rarity rarity, Player player, Edition edition);
 
     List<Card> findInDuplicatesByCardNameAndFunLevelAndRarity(String cardName, FunLevel funLevel, Rarity rarity, Player player);
+
+    List<Card> findInDuplicatesAllCards(Player player);
+
+
+    List<Card> findInAlbumAllCards(Player player, Album album);
 }

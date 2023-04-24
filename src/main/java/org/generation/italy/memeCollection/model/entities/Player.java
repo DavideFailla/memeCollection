@@ -2,16 +2,15 @@ package org.generation.italy.memeCollection.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -22,13 +21,11 @@ public class Player {
     @SequenceGenerator(name = "player_generator", sequenceName = "player_sequence", allocationSize = 1)
     @Column(name = "id_player")
     private long id;
-    private String firstname;
-    private String lastname;
-    private LocalDate dob;
-    private String email;
     private String nickname;
-    private String password;
     @OneToMany(mappedBy = "player", fetch = FetchType.LAZY)
     private List<Album> album;
-    private double money;
+    private BigDecimal money;
+    @OneToOne
+    @JoinColumn(name = "id_user")
+    private User user;
 }

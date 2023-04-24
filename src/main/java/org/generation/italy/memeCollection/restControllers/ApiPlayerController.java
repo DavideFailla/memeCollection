@@ -2,17 +2,18 @@ package org.generation.italy.memeCollection.restControllers;
 
 import org.generation.italy.memeCollection.model.data.abstractions.GenericRepository;
 import org.generation.italy.memeCollection.model.data.exceptions.DataException;
-import org.generation.italy.memeCollection.model.dtos.CardDto;
 import org.generation.italy.memeCollection.model.dtos.PlayerDto;
-import org.generation.italy.memeCollection.model.entities.Album;
 import org.generation.italy.memeCollection.model.entities.Card;
 import org.generation.italy.memeCollection.model.entities.Edition;
 import org.generation.italy.memeCollection.model.entities.Player;
 import org.generation.italy.memeCollection.model.services.abstractions.AbstractGameService;
+import org.generation.italy.memeCollection.model.services.implementations.AuthenticationService;
 import org.generation.italy.memeCollection.model.services.implementations.GenericService;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,22 +30,14 @@ public class ApiPlayerController {
     }
 
     @PostMapping("/createPack")
-    ResponseEntity<PlayerDto> assignCardsToPlayer(@RequestParam long playerId){
-        try {
-            List<Card> cards = gameService.createPack(Edition.OG);
-            Optional<Player> player = service.findById(playerId);
-            if(player.isPresent()){
-                return ResponseEntity.ok().body(PlayerDto.fromEntity(gameService.assignCardToPlayer(cards,player.get())));
-            }
-            return ResponseEntity.notFound().build();
-        } catch (DataException e){
-            e.printStackTrace();
-            return ResponseEntity.internalServerError().build();
-        }
+    ResponseEntity<PlayerDto> assignCardsToPlayer(Principal principal){
+        Player player = gameService.findPlayerByEmail(principal.getName());
+        List<Card> cards = gameService.createPack(Edition.OG);
+        return ResponseEntity.ok().body(PlayerDto.fromEntity(gameService.assignCardToPlayer(cards,player)));
     }
 
     @GetMapping("/findAllPlayers")
-    public ResponseEntity<List<PlayerDto>> findAll(){
+    public ResponseEntity<List<PlayerDto>> findAll(Principal principal){
         try {
             List<Player> players = this.service.findAll();
             return ResponseEntity.ok().body(PlayerDto.fromEntityList(players));

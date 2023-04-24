@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS player,card,album,deck;
+DROP TABLE IF EXISTS token,_user,player,card,album,meme;
 
 DROP TYPE IF EXISTS fun_level, rarity, edition;
 
@@ -6,17 +6,47 @@ CREATE TYPE fun_level AS ENUM ('PATHETIC', 'BASIC', 'LOL', 'LMAO', 'RIP');
 CREATE TYPE rarity AS ENUM ('COMMON', 'UNCOMMON', 'RARE', 'EPIC', 'LEGENDARY');
 CREATE TYPE edition AS ENUM ('OG','GEN_Z');
 
+CREATE TABLE _user(
+	id_user INTEGER NOT NULL,
+	firstname VARCHAR(255) NOT NULL,
+	lastname VARCHAR(255) NOT NULL,
+	dob DATE NOT NULL,
+	email VARCHAR(255) NOT NULL,
+	password VARCHAR(255) NOT NULL,
+	role VARCHAR(255) NOT NULL,
+	CONSTRAINT PK_user PRIMARY KEY(id_user)
+);
+
+CREATE SEQUENCE user_sequence
+	start 1
+	increment 1
+	OWNED BY _user.id_user;
+
+CREATE TABLE token(
+	id_token INTEGER NOT NULL,
+	token VARCHAR(255) NOT NULL,
+	revoked BOOLEAN NOT NULL,
+	expired BOOLEAN NOT NULL,
+	token_type VARCHAR(255) NOT NULL,
+	id_user INTEGER NOT NULL,
+	CONSTRAINT PK_token PRIMARY KEY(id_token),
+	CONSTRAINT FK_token_user FOREIGN KEY(id_user)
+		REFERENCES _user(id_user)
+);
+
+CREATE SEQUENCE token_sequence
+	start 1
+	increment 1
+	OWNED BY token.id_token;
 
 CREATE TABLE player(
 	id_player BIGINT NOT NULL,
-	firstname VARCHAR(32) NOT NULL,
-	lastname VARCHAR(32) NOT NULL,
-	dob DATE NOT NULL,
-	email VARCHAR(50) NOT NULL,
 	nickname VARCHAR(32) NOT NULL,
-	password VARCHAR(32) NOT NULL,
-	money DECIMAL NOT NULL,
-	CONSTRAINT PK_player PRIMARY KEY(id_player)
+	money NUMERIC(38,2) NOT NULL,
+	id_user INTEGER NOT NULL,
+	CONSTRAINT PK_player PRIMARY KEY(id_player),
+	CONSTRAINT FK_player_user FOREIGN KEY(id_user)
+		REFERENCES _user(id_user)
 );
 
 CREATE SEQUENCE player_sequence
@@ -47,7 +77,7 @@ CREATE TABLE meme(
     edition edition NOT NULL,
     fun_level fun_level NOT NULL,
     rarity rarity NOT NULL,
-    CONSTRAINT FK_meme PRIMARY KEY (id_meme)
+    CONSTRAINT PK_meme PRIMARY KEY (id_meme)
 );
 
 CREATE SEQUENCE meme_sequence
@@ -73,9 +103,6 @@ CREATE SEQUENCE card_sequence
 	start 1
 	increment 1
 	OWNED BY card.id_card;
-
-
-	--SELECT setval('sequence_name', 1, FALSE); per resettare la sequenza
 
 
 
