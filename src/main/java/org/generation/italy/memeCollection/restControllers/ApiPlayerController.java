@@ -11,6 +11,7 @@ import org.generation.italy.memeCollection.model.services.implementations.Authen
 import org.generation.italy.memeCollection.model.services.implementations.GenericService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -30,10 +31,11 @@ public class ApiPlayerController {
     }
 
     @PostMapping("/createPack")
-    ResponseEntity<PlayerDto> assignCardsToPlayer(Principal principal){
+    ResponseEntity<List<Card>> assignCardsToPlayer(Principal principal, @RequestParam Edition packEdition){
         Player player = gameService.findPlayerByEmail(principal.getName());
-        List<Card> cards = gameService.createPack(Edition.OG);
-        return ResponseEntity.ok().body(PlayerDto.fromEntity(gameService.assignCardToPlayer(cards,player)));
+        List<Card> cards = gameService.createPack(packEdition);
+        gameService.assignCardToPlayer(cards,player);
+        return ResponseEntity.ok().body(cards);
     }
 
     @GetMapping("/findAllPlayers")

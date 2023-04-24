@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -60,8 +61,8 @@ public class ApiCardController {
     }
 
     @GetMapping("/showAlbum")
-    public ResponseEntity<List<CardDto>> showAlbum(@RequestParam long playerId,@RequestParam long albumId){
-        Player player = gameService.getPlayerFromId(playerId);
+    public ResponseEntity<List<CardDto>> showAlbum(Principal principal, @RequestParam long albumId){
+        Player player = gameService.findPlayerByEmail(principal.getName());
         Album album = gameService.getAlbumFromId(albumId);
         List<Card> result = gameService.showAlbum(player,album);
         if(result.size() > 0){
@@ -72,12 +73,12 @@ public class ApiCardController {
 
     @GetMapping("/findInAlbum")
     public ResponseEntity<List<CardDto>> findInAlbumByCardNameAndFunLevelAndRarity(@RequestParam long albumId,
-                                                                                   @RequestParam long playerId,
+                                                                                   Principal principal,
                                                                                    @RequestParam(required = false) String cardName,
                                                                                    @RequestParam(required = false) FunLevel funLevel,
                                                                                    @RequestParam(required = false) Rarity rarity){
 
-        Player player = gameService.getPlayerFromId(playerId);
+        Player player = gameService.findPlayerByEmail(principal.getName());
         Album album = gameService.getAlbumFromId(albumId);
         if(funLevel == null && rarity == null && cardName == null ){
             List<Card> lc = gameService.findInAlbumAllCards(player,album);
@@ -110,12 +111,12 @@ public class ApiCardController {
 
     }
     @GetMapping("/findInDuplicates")
-    public ResponseEntity<List<CardDto>> findInDuplicatesByCardNameAndEditionAndFunLevelAndRarity(@RequestParam long playerId,
+    public ResponseEntity<List<CardDto>> findInDuplicatesByCardNameAndEditionAndFunLevelAndRarity(Principal principal,
                                                                                                   @RequestParam(required = false) Edition edition,
                                                                                                   @RequestParam(required = false) String cardName,
                                                                                                   @RequestParam(required = false) FunLevel funLevel,
                                                                                                   @RequestParam(required = false) Rarity rarity){
-        Player player = gameService.getPlayerFromId(playerId);
+        Player player = gameService.findPlayerByEmail(principal.getName());
         if(funLevel == null && rarity == null && cardName == null && edition == null ){
             List<Card> lc = gameService.findInDuplicatesAllCards(player);
             return ResponseEntity.ok().body(CardDto.fromEntityList(lc));
