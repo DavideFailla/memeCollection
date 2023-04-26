@@ -61,9 +61,10 @@ public class ApiCardController {
     }
 
     @GetMapping("/showAlbum")
-    public ResponseEntity<List<CardDto>> showAlbum(Principal principal, @RequestParam long albumId){
+    public ResponseEntity<List<CardDto>> showAlbum(Principal principal, @RequestParam String albumEdition){
+        Edition edition = Edition.valueOf(albumEdition);
         Player player = gameService.findPlayerByEmail(principal.getName());
-        Album album = gameService.getAlbumFromId(albumId);
+        Album album = gameService.findAlbumByEditionAndPlayer(edition,player);
         List<Card> result = gameService.showAlbum(player,album);
         if(result.size() > 0){
             return ResponseEntity.ok().body(CardDto.fromEntityList(result));

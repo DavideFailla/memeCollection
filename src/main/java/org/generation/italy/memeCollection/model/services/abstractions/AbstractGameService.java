@@ -5,6 +5,7 @@ import org.generation.italy.memeCollection.model.entities.*;
 import java.util.List;
 
 public interface AbstractGameService {
+    Album findAlbumByEditionAndPlayer(Edition edition, Player player);
     Player findPlayerByEmail(String email);
     List<Card> createPack(Edition edition);
     Player assignCardToPlayer(List<Card> pack, Player player);

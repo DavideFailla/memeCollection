@@ -36,6 +36,11 @@ public class GameService implements AbstractGameService {
     }
 
     @Override
+    public Album findAlbumByEditionAndPlayer(Edition edition, Player player) {
+        return albumRepo.findByEditionAndPlayer(edition,player);
+    }
+
+    @Override
     public Player findPlayerByEmail(String email){
         return playerRepo.findPlayerByEmail(email);
     }
