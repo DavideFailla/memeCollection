@@ -7,6 +7,7 @@ import org.generation.italy.memeCollection.auth.AuthenticationRequest;
 import org.generation.italy.memeCollection.auth.AuthenticationResponse;
 import org.generation.italy.memeCollection.auth.RegisterRequest;
 import org.generation.italy.memeCollection.model.services.implementations.AuthenticationService;
+import org.generation.italy.memeCollection.model.services.implementations.LogoutService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

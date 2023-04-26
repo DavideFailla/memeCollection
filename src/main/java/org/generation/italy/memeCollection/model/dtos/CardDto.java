@@ -16,13 +16,15 @@ import java.util.stream.StreamSupport;
 @NoArgsConstructor
 public class CardDto {
     private long id;
+    private long memeId;
     private String name;
     private Edition edition;
     private FunLevel funLevel;
     private Rarity rarity;
 
-    public CardDto(long id, String name, Edition edition, FunLevel funLevel, Rarity rarity) {
+    public CardDto(long id,long memeId ,String name, Edition edition, FunLevel funLevel, Rarity rarity) {
         this.id = id;
+        this.memeId = memeId;
         this.name = name;
         this.edition = edition;
         this.funLevel = funLevel;
@@ -30,7 +32,7 @@ public class CardDto {
     }
 
     public static CardDto fromEntity(Card c){
-        return new CardDto(c.getId(),c.getMeme().getName(),c.getMeme().getEdition(), c.getMeme().getFunLevel(), c.getMeme().getRarity());
+        return new CardDto(c.getId(),c.getMeme().getId(),c.getMeme().getName(),c.getMeme().getEdition(), c.getMeme().getFunLevel(), c.getMeme().getRarity());
     }
 
     public static List<CardDto> fromEntityList(List<Card> cards){

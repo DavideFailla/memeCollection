@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.generation.italy.memeCollection.auth.AuthenticationRequest;
 import org.generation.italy.memeCollection.auth.AuthenticationResponse;
 import org.generation.italy.memeCollection.auth.RegisterRequest;
+import org.generation.italy.memeCollection.model.data.abstractions.AlbumRepository;
 import org.generation.italy.memeCollection.model.data.abstractions.PlayerRepository;
 import org.generation.italy.memeCollection.model.data.abstractions.TokenRepository;
 import org.generation.italy.memeCollection.model.data.abstractions.UserRepository;
@@ -20,6 +21,8 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 @Service
 @RequiredArgsConstructor
@@ -30,6 +33,7 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final PlayerRepository playerRepository;
+    private final AlbumRepository albumRepository;
 
     public AuthenticationResponse register(RegisterRequest request) {
         var user = User.builder()
@@ -45,8 +49,27 @@ public class AuthenticationService {
                 .money(new BigDecimal("2000.0"))
                 .user(user)
                 .build();
+        Album albumOG = Album.builder()
+                .title("OG")
+                .description("Album for OG cards")
+                .cardSet(new HashSet<>())
+                .edition(Edition.OG)
+                .player(player)
+                .cardDuplicates(new ArrayList<>())
+                .build();
+        Album albumGenZ = Album.builder()
+                .title("GEN_Z")
+                .description("Album for GEN_Z cards")
+                .cardSet(new HashSet<>())
+                .edition(Edition.GEN_Z)
+                .player(player)
+                .cardDuplicates(new ArrayList<>())
+                .build();
+
         var savedUser = repository.save(user);
-        var savedPlayer = playerRepository.save(player);
+        playerRepository.save(player);
+        albumRepository.save(albumOG);
+        albumRepository.save(albumGenZ);
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
         saveUserToken(savedUser, jwtToken);
