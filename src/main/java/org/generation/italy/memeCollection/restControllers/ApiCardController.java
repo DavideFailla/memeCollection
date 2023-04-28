@@ -60,7 +60,7 @@ public class ApiCardController {
         }
     }
 
-    @GetMapping("/showAlbum")
+    @GetMapping("/album")
     public ResponseEntity<List<CardDto>> showAlbum(Principal principal, @RequestParam String albumEdition){
         Edition edition = Edition.valueOf(albumEdition);
         Player player = gameService.findPlayerByEmail(principal.getName());
