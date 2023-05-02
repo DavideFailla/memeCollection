@@ -2,13 +2,14 @@ package org.generation.italy.memeCollection.model.services.abstractions;
 
 import org.generation.italy.memeCollection.model.entities.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface AbstractGameService {
     Album findAlbumByEditionAndPlayer(Edition edition, Player player);
     Player findPlayerByEmail(String email);
     List<Card> createPack(Edition edition);
-    Player assignCardToPlayer(List<Card> pack, Player player);
+    Player assignCardToPlayer(List<Card> pack, Player player, BigDecimal packCost);
     List<Card> showAlbum(Player player, Album album);
     Player getPlayerFromId(long playerId);
     Album getAlbumFromId(long albumId);

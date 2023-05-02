@@ -12,6 +12,7 @@ import org.generation.italy.memeCollection.model.services.implementations.Generi
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.List;
 
@@ -28,11 +29,13 @@ public class ApiPlayerController {
     }
 
     @PostMapping("/createPack")
-    ResponseEntity<List<CardDto>> createPack(Principal principal, @RequestParam String stringPackEdition){
+    ResponseEntity<List<CardDto>> createPack(Principal principal, @RequestParam String stringPackEdition, @RequestParam
+                                             String stringPackCost){
         Edition packEdition = Edition.valueOf(stringPackEdition);
+        BigDecimal packCost = new BigDecimal(stringPackCost);
         Player player = gameService.findPlayerByEmail(principal.getName());
         List<Card> cards = gameService.createPack(packEdition);
-        gameService.assignCardToPlayer(cards,player);
+        gameService.assignCardToPlayer(cards,player, packCost);
         return ResponseEntity.ok().body(CardDto.fromEntityList(cards));
     }
 

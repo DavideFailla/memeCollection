@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -89,11 +90,13 @@ public class GameService implements AbstractGameService {
     }
 
     @Override
-    public Player assignCardToPlayer(List<Card> pack, Player player){
+    public Player assignCardToPlayer(List<Card> pack, Player player, BigDecimal packCost){
+        player.setMoney(player.getMoney().subtract(packCost));
+        playerRepo.save(player);
         Album playerAlbum = albumRepo.findByEditionAndPlayer(Edition.OG,player);
         for (Card c : pack){
             c.setPlayer(player);
-                if(playerAlbum.isCardADuplicate(c)){ //allora la carta è un duplicato
+                if(playerAlbum.isCardADuplicate(c)){
                     playerAlbum.addDuplicates(c);
                 }else {
                     c.setAlbum(playerAlbum);
