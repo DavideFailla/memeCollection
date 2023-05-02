@@ -26,29 +26,6 @@ public class ApiCardController {
         this.gameService = gameService;
     }
 
-//    @PostMapping()
-//    public ResponseEntity<CardDto> create(@RequestBody Card c){
-//        try {
-//            var cardResult = this.service.create(c);
-//            CardDto dtoResult = CardDto.fromEntity(c);
-//            return ResponseEntity.created(URI.create("/api/cards" + cardResult.getId())).body(dtoResult);
-//        } catch (DataException e) {
-//            e.printStackTrace();
-//            return ResponseEntity.internalServerError().build();
-//        }
-//    }
-
-//    @PostMapping()
-//    public ResponseEntity<List<Card>> createPack(){
-//        List<Card>cards = gameService.createPack(Edition.OG);
-//        if(cards.size() != 0){
-//            return ResponseEntity.ok().body(cards);
-//        }
-//        return ResponseEntity.notFound().build();
-//    }
-
-
-
     @GetMapping("/showAllCards")
     public ResponseEntity<List<CardDto>> findAll(){
         try {

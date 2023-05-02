@@ -28,18 +28,21 @@ public class ApiPlayerController {
         this.gameService = gameService;
     }
 
-    @PostMapping("/createPack")
+    @PostMapping("/pack")
     ResponseEntity<List<CardDto>> createPack(Principal principal, @RequestParam String stringPackEdition, @RequestParam
                                              String stringPackCost){
         Edition packEdition = Edition.valueOf(stringPackEdition);
         BigDecimal packCost = new BigDecimal(stringPackCost);
         Player player = gameService.findPlayerByEmail(principal.getName());
         List<Card> cards = gameService.createPack(packEdition);
+        if(player.getMoney().compareTo(packCost) < 0){
+            return ResponseEntity.internalServerError().build();
+        }
         gameService.assignCardToPlayer(cards,player, packCost);
         return ResponseEntity.ok().body(CardDto.fromEntityList(cards));
     }
 
-    @GetMapping("/findAllPlayers")
+    @GetMapping("/allPlayers")
     public ResponseEntity<List<PlayerDto>> findAll(Principal principal){
         try {
             List<Player> players = this.service.findAll();

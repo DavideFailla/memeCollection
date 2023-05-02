@@ -211,7 +211,7 @@ public interface CardRepository extends GenericRepository<Card>{
     @Query(
              """
                     FROM Card c
-                    WHERE c.album = null AND c.player = :player 
+                    WHERE c.album.id = null AND c.player = :player
                     """
     )
     List<Card> findInDuplicatesAllCards(Player player);
