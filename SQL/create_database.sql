@@ -105,6 +105,166 @@ CREATE SEQUENCE card_sequence
 	OWNED BY card.id_card;
 
 
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'FAP_FAP', 'OG', 'LMAO', 'COMMON');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'YAO_MING', 'OG', 'PATHETIC', 'COMMON');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'TROLL', 'OG', 'LOL', 'COMMON');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'CRYBABY', 'OG', 'BASIC', 'COMMON');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'TIZIO_CEREALI_V2', 'OG', 'LMAO', 'COMMON');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'GROSSA_RISATA', 'OG', 'BASIC', 'COMMON');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'JACKIE_CHAN', 'OG', 'PATHETIC', 'COMMON');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'ME_GUSTA', 'OG', 'BASIC', 'UNCOMMON');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'FOREVER_ALONE', 'OG', 'BASIC', 'UNCOMMON');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'NO', 'OG', 'RIP', 'UNCOMMON');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'MR_BEAN', 'OG', 'LMAO', 'UNCOMMON');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'IL_PENSATORE', 'OG', 'BASIC', 'UNCOMMON');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'LOL', 'OG', 'LOL', 'RARE');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'LIKE_A_BOSS', 'OG', 'LOL', 'RARE');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'TIZIO_CEREALI', 'OG', 'LMAO', 'RARE');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'TUTTO_A_POSTO', 'OG', 'RIP', 'RARE');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'TIZIO_DAVANTI_AL_PC', 'OG', 'LMAO', 'EPIC');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'PATHETIC', 'OG', 'PATHETIC', 'EPIC');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'IL_MIGLIORE', 'OG', 'LMAO', 'EPIC');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'PEDO_BEAR', 'OG', 'RIP', 'LEGENDARY');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'HASBULLA', 'GEN_Z', 'LMAO', 'COMMON');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'SMART_GUY', 'GEN_Z', 'BASIC', 'COMMON');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'IL_PENSATORE_Z', 'GEN_Z', 'BASIC', 'COMMON');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'SIDE_EYE_POPEYE', 'GEN_Z', 'BASIC', 'COMMON');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'RAGAZZO_DISTRATTO', 'GEN_Z', 'PATHETIC', 'COMMON');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'LESSS_GOO', 'GEN_Z', 'LOL', 'COMMON');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'LEONARDO_DI_CAPRIO', 'GEN_Z', 'LOL', 'COMMON');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'CASPITIRINA_CIRRIDI', 'GEN_Z', 'LOL', 'UNCOMMON');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'HIDE_THE_PAIN_HAROLD', 'GEN_Z', 'RIP', 'UNCOMMON');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'KEKW', 'GEN_Z', 'RIP', 'UNCOMMON');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'FRY', 'GEN_Z', 'LMAO', 'UNCOMMON');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'STONKS', 'GEN_Z', 'PATHETIC', 'UNCOMMON');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'KOKSAL_BABA', 'GEN_Z', 'RIP', 'RARE');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'PABLO_ESCOBAR', 'GEN_Z', 'LMAO', 'RARE');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'MICHAEL_JORDAN', 'GEN_Z', 'PATHETIC', 'RARE');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'RAGAZZA_DISASTROSA', 'GEN_Z', 'RIP', 'RARE');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'BOMBA_ANARCHICA', 'GEN_Z', 'LMAO', 'EPIC');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'OBAMA', 'GEN_Z', 'LOL', 'EPIC');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'PEEPO', 'GEN_Z', 'LOL', 'EPIC');
+
+INSERT INTO meme(
+	id_meme, name, edition, fun_level, rarity)
+	VALUES (nextval('meme_sequence'), 'IL_TUTTOFARE', 'GEN_Z', 'RIP', 'LEGENDARY');
+
 
 
 

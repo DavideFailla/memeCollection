@@ -37,6 +37,11 @@ public class GameService implements AbstractGameService {
     }
 
     @Override
+    public List<Meme> getAllMemeNames() {
+        return memeRepo.allMemeNames();
+    }
+
+    @Override
     public Album findAlbumByEditionAndPlayer(Edition edition, Player player) {
         return albumRepo.findByEditionAndPlayer(edition,player);
     }

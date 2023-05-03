@@ -3,6 +3,7 @@ package org.generation.italy.memeCollection.restControllers;
 import org.generation.italy.memeCollection.model.data.abstractions.GenericRepository;
 import org.generation.italy.memeCollection.model.data.exceptions.DataException;
 import org.generation.italy.memeCollection.model.dtos.CardDto;
+import org.generation.italy.memeCollection.model.dtos.MemeDto;
 import org.generation.italy.memeCollection.model.entities.*;
 import org.generation.italy.memeCollection.model.services.abstractions.AbstractGameService;
 import org.generation.italy.memeCollection.model.services.implementations.GenericService;
@@ -26,15 +27,10 @@ public class ApiCardController {
         this.gameService = gameService;
     }
 
-    @GetMapping("/showAllCards")
-    public ResponseEntity<List<CardDto>> findAll(){
-        try {
-            List<Card> cards = this.service.findAll();
-            return ResponseEntity.ok().body(CardDto.fromEntityList(cards));
-        } catch (DataException e) {
-            e.printStackTrace();
-            return ResponseEntity.internalServerError().build();
-        }
+    @GetMapping("/memes")
+    public ResponseEntity<List<MemeDto>> findAll(){
+        List<Meme> memes = gameService.getAllMemeNames();
+        return ResponseEntity.ok().body(MemeDto.fromEntityList(memes));
     }
 
     @GetMapping("/album")
@@ -88,7 +84,7 @@ public class ApiCardController {
             return ResponseEntity.ok().body(CardDto.fromEntityList(lc));
 
     }
-    @GetMapping("/findInDuplicates")
+    @GetMapping("/duplicates")
     public ResponseEntity<List<CardDto>> findInDuplicatesByCardNameAndEditionAndFunLevelAndRarity(Principal principal,
                                                                                                   @RequestParam(required = false) Edition edition,
                                                                                                   @RequestParam(required = false) String cardName,

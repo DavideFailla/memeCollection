@@ -4,6 +4,7 @@ import org.generation.italy.memeCollection.model.entities.Edition;
 import org.generation.italy.memeCollection.model.entities.Meme;
 import org.generation.italy.memeCollection.model.entities.Rarity;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -26,4 +27,9 @@ public interface MemeRepository extends GenericRepository<Meme>{
     List<Meme> findByEditionAndRarity(Edition e, Rarity r, Pageable p);
 
     int countByEditionAndRarity(Edition e, Rarity r);
+
+    @Query("""
+            FROM Meme m
+            """)
+    List<Meme> allMemeNames();
 }
