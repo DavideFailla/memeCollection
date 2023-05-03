@@ -95,10 +95,10 @@ public class GameService implements AbstractGameService {
     }
 
     @Override
-    public Player assignCardToPlayer(List<Card> pack, Player player, BigDecimal packCost){
+    public Player assignCardToPlayer(List<Card> pack, Player player, BigDecimal packCost, Edition packEdition){
         player.setMoney(player.getMoney().subtract(packCost));
         playerRepo.save(player);
-        Album playerAlbum = albumRepo.findByEditionAndPlayer(Edition.OG,player);
+        Album playerAlbum = albumRepo.findByEditionAndPlayer(packEdition,player);
         for (Card c : pack){
             c.setPlayer(player);
                 if(playerAlbum.isCardADuplicate(c)){

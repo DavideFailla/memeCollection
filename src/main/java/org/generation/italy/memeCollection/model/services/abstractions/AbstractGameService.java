@@ -10,7 +10,7 @@ public interface AbstractGameService {
     Album findAlbumByEditionAndPlayer(Edition edition, Player player);
     Player findPlayerByEmail(String email);
     List<Card> createPack(Edition edition);
-    Player assignCardToPlayer(List<Card> pack, Player player, BigDecimal packCost);
+    Player assignCardToPlayer(List<Card> pack, Player player, BigDecimal packCost, Edition packEdition);
     List<Card> showAlbum(Player player, Album album);
     Player getPlayerFromId(long playerId);
     Album getAlbumFromId(long albumId);

@@ -29,8 +29,7 @@ public class ApiPlayerController {
     }
 
     @PostMapping("/pack")
-    ResponseEntity<List<CardDto>> createPack(Principal principal, @RequestParam String stringPackEdition
-                                             ){
+    ResponseEntity<List<CardDto>> createPack(Principal principal, @RequestParam String stringPackEdition){
         Edition packEdition = Edition.valueOf(stringPackEdition);
         BigDecimal packCost = new BigDecimal("150");
         Player player = gameService.findPlayerByEmail(principal.getName());
@@ -38,7 +37,7 @@ public class ApiPlayerController {
         if(player.getMoney().compareTo(packCost) < 0){
             return ResponseEntity.internalServerError().build();
         }
-        gameService.assignCardToPlayer(cards,player, packCost);
+        gameService.assignCardToPlayer(cards,player, packCost, packEdition);
         return ResponseEntity.ok().body(CardDto.fromEntityList(cards));
     }
 
