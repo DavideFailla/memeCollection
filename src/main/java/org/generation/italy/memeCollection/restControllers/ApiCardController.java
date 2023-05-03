@@ -90,6 +90,9 @@ public class ApiCardController {
                                                                                                   @RequestParam(required = false) String cardName,
                                                                                                   @RequestParam(required = false) FunLevel funLevel,
                                                                                                   @RequestParam(required = false) Rarity rarity){
+        if(cardName != null){
+            cardName = cardName.toUpperCase();
+        }
         Player player = gameService.findPlayerByEmail(principal.getName());
         if(funLevel == null && rarity == null && cardName == null && edition == null ){
             List<Card> lc = gameService.findInDuplicatesAllCards(player);
