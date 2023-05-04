@@ -41,14 +41,9 @@ public class ApiPlayerController {
         return ResponseEntity.ok().body(CardDto.fromEntityList(cards));
     }
 
-    @GetMapping("/allPlayers")
-    public ResponseEntity<List<PlayerDto>> findAll(Principal principal){
-        try {
-            List<Player> players = this.service.findAll();
-            return ResponseEntity.ok().body(PlayerDto.fromEntityList(players));
-        } catch (DataException e) {
-            e.printStackTrace();
-            return ResponseEntity.internalServerError().build();
-        }
+    @GetMapping("/player")
+    public ResponseEntity<PlayerDto> getCurrentPlayer(Principal principal){
+        Player player = gameService.findPlayerByEmail(principal.getName());
+        return ResponseEntity.ok().body(PlayerDto.fromEntity(player));
     }
 }
