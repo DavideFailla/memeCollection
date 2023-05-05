@@ -7,7 +7,9 @@ import org.generation.italy.memeCollection.auth.AuthenticationRequest;
 import org.generation.italy.memeCollection.auth.AuthenticationResponse;
 import org.generation.italy.memeCollection.auth.RegisterRequest;
 import org.generation.italy.memeCollection.model.services.implementations.AuthenticationService;
+import org.generation.italy.memeCollection.model.services.implementations.LogoutService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -19,6 +21,7 @@ import java.io.IOException;
 public class AuthenticationController {
 
     private final AuthenticationService service;
+    private final LogoutService logoutService;
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(
             @RequestBody RegisterRequest request
@@ -38,5 +41,12 @@ public class AuthenticationController {
             HttpServletResponse response
     ) throws IOException {
         service.refreshToken(request, response);
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout(HttpServletRequest request , HttpServletResponse response,
+                                       Authentication authentication){
+        logoutService.logout(request, response, authentication);
+        return ResponseEntity.noContent().build();
     }
 }

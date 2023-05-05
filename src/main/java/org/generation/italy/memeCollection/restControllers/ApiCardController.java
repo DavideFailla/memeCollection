@@ -45,7 +45,13 @@ public class ApiCardController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/findInAlbum")
+    @GetMapping("/{albumEdition}/memeNames")
+    public ResponseEntity<List<String>> getMemeNames(@PathVariable String albumEdition){
+        Edition edition = Edition.valueOf(albumEdition);
+        return ResponseEntity.ok().body(gameService.getAllMemeNamesByEdition(edition));
+    }
+
+    @GetMapping("/albums")
     public ResponseEntity<List<CardDto>> findInAlbumByCardNameAndFunLevelAndRarity(@RequestParam long albumId,
                                                                                    Principal principal,
                                                                                    @RequestParam(required = false) String cardName,

@@ -32,4 +32,6 @@ public interface MemeRepository extends GenericRepository<Meme>{
             FROM Meme m
             """)
     List<Meme> allMemeNames();
+
+    List<Meme> findByEdition(Edition edition);
 }

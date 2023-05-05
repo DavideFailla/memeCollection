@@ -37,6 +37,16 @@ public class GameService implements AbstractGameService {
     }
 
     @Override
+    public List<String> getAllMemeNamesByEdition(Edition edition) {
+        List<Meme> memes = memeRepo.findByEdition(edition);
+        List<String> memeNames = new ArrayList<>();
+        for(Meme m : memes){
+            memeNames.add(m.getName());
+        }
+        return memeNames;
+    }
+
+    @Override
     public List<Meme> getAllMemeNames() {
         return memeRepo.allMemeNames();
     }

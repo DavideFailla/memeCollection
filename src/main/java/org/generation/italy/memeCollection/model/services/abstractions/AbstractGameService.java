@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface AbstractGameService {
+    List<String> getAllMemeNamesByEdition(Edition edition);
     List<Meme> getAllMemeNames();
     Album findAlbumByEditionAndPlayer(Edition edition, Player player);
     Player findPlayerByEmail(String email);
