@@ -46,7 +46,7 @@ public class AuthenticationService {
                 .build();
         Player player = Player.builder()
                 .nickname(request.getNickname())
-                .money(new BigDecimal("2000.0"))
+                .money(new BigDecimal("10000.0"))
                 .user(user)
                 .build();
         Album albumOG = Album.builder()
